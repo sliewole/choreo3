@@ -6,8 +6,8 @@ const UUID = process.env.UUID || 'cb000309-2fc9-4aae-bb16-7759a0285fd0'; //若�
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
 const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     // 哪吒端口为{443,8443,2096,2087,2083,2053}其中之一开启tls
 const NEZHA_KEY = process.env.NEZHA_KEY || 'N9BVoBfucVIrIzCBt8';   // 没用哪吒，把这个参数空着
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.zzx.free.hr';     // 建议使用token，argo端口8080，cf后台设置需对应,使用json需上传json和yml文件至files目录
-const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiOGI5NzI0MDgwZTU1ZTcwMzcwZmI3NDI4NzkyMmYzMWIiLCJ0IjoiOGNlY2VlYzQtYzZiNi00N2VkLThhZjItY2I4MThmMDkxZWJkIiwicyI6Ik5XWTFNV1ZsWm1NdFpEYzJZeTAwWkdSaExUbGtZall0TnpneVpqZ3haVE00WkRBNSJ9';
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'chero3.yugujj.dpdns.org';     // 建议使用token，argo端口8080，cf后台设置需对应,使用json需上传json和yml文件至files目录
+const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiYzk1MmUwNTI1YWZkZGQ1YmRmNTNhNWE1NmRlNDRiYjciLCJ0IjoiMDk3NmJiMWYtNTI3Zi00ZjczLWI4ODctNjc5MjIxZGRjMzk1IiwicyI6Ik1ETmxaamc0WmpBdE5USTBPQzAwTm1RMkxUazJPRGt0T0RjNE5ERTJaR0kzTnpReCJ9';
 const CFIP = process.env.CFIP || 'www.visa.com.tw';
 const NAME = process.env.NAME || 'Choreo';
 
@@ -23,7 +23,7 @@ const metaInfo = execSync(
 const ISP = metaInfo.trim();
 
 // sub subscription
-app.get('/sub', (req, res) => {
+app.get('/sub2', (req, res) => {
   const VMESS = { v: '2', ps: `${NAME}-${ISP}`, add: CFIP, port: '443', id: UUID, aid: '0', scy: 'none', net: 'ws', type: 'none', host: ARGO_DOMAIN, path: '/vmess-argo?ed=2048', tls: 'tls', sni: ARGO_DOMAIN, alpn: '' };
   const vlessURL = `vless://${UUID}@${CFIP}:443?encryption=none&security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=%2Fvless-argo%3Fed%3D2048#${NAME}-${ISP}`;
   const vmessURL = `vmess://${Buffer.from(JSON.stringify(VMESS)).toString('base64')}`;
